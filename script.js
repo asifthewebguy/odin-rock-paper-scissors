@@ -2,9 +2,26 @@ let yourScore = 0;
 let computerScore = 0;
 let rounds = 5;
 let scoreBoard = [];
+const messages =[
+    "You Win!, Rock beats Scissors!",
+    "You Lose! Paper beats Rock",
+    "You Win!, Paper beats Rock!",
+    "You Lose! Scissors beats Paper",
+    "You Win!, Scissors beats paper!",
+    "You Lose! Rock beats Scissors",
+    "It's a tie! Play again.",
+    "Game Over! You Win!",
+    "Game Over! Computer Wins!",
+    "Whats your next Move?",
+    "Only 2 Rounds left. Whats your next Move?",
+    "Final Round!",
 
-let pSE = document.getElementsByClassName('yourscore')[0];
-let cSE = document.getElementsByClassName('compscore')[0];
+];
+// message element
+let messageDisplayElement = document.getElementsByClassName('descR')[0];
+// scoreboard elements
+const pSE = document.getElementsByClassName('yourscore')[0];
+const cSE = document.getElementsByClassName('compscore')[0];
 
 // getting buttons
 let psButton = document.getElementsByClassName('psButton');
@@ -18,99 +35,109 @@ for (let i = 0; i < psButton.length; i++) {
 // button section
 const buttonSection = document.getElementsByClassName('buttons')[0];
 
-
-
 let resultSect = document.getElementsByClassName('result');
 resetResultDisplay();
 
+// computer selection
 function computerPlay(){
     var options = ['rock', 'paper', 'scissors'];
     var random = Math.floor(Math.random() * 3);
     return options[random];
 }
 
+// takes user result and starts game round
 function playerSelection(selection){
     buttonSection.style.display = "none";
     playRound(selection, computerPlay());
-    console.log(selection);
 }
 
+// displays approperiate result on screen
 function displayResults(id, location =""){
     resultSect[id].style.display = "flex";
     if(location == 'flip'){
         resultSect[id].getElementsByTagName('img')[0].classList.add("flip");
     }
     uSB(yourScore,computerScore);
+
     setTimeout(
         resetResultDisplay, 3000
     );
 }
 
+// resets result display
 function resetResultDisplay(){
-    buttonSection.style.display = "block";
-    for(let i =0; i < resultSect.length; i++){
-        resultSect[i].style.display = "none";
+    if(rounds >= 1){
+        buttonSection.style.display = "block";
+        for(let i =0; i < resultSect.length; i++){
+            resultSect[i].style.display = "none";
+        }
+        game(scoreBoard.length - 1, 1);
+    }else{
+        game(scoreBoard.length - 1, 1);
     }
+    
 }
 
+// update score on screen
 function uSB(ys, cs) {
     pSE.innerHTML = ys;
     cSE.innerHTML = cs;
 }
 
+
 function playRound(playerSelection, computerSelection){
     ps = playerSelection;
     cs = computerSelection;
-    console.log(ps, cs);
     let round = { pSelection: ps, cSelection: cs };
+
+    function gameProcess(r,ys,cs,dr1,dr2,w,m){
+        rounds +=r;
+        yourScore +=ys;
+        computerScore +=cs;
+        displayResults(dr1,dr2);
+        round.winner = w;
+        round.message = messages[m];
+    }
+
     if (ps == "rock" && cs == "scissors") {
-        yourScore +=1;
-        displayResults(2,"flip");
-        message = "You Win!, Rock beats Scissors!";
-        round.winner = "you";
-        round.message = message;
+        gameProcess(-1,1,0,2,"flip","you",0);
     }else if(ps == "rock" && cs == "paper") {
-        computerScore +=1;
-        displayResults(0,"");
-        message = "You Lose! Paper beats Rock";
-        round.winner = "computer";
-        round.message = message;
+        gameProcess(-1,0,1,0,"","computer",1);
     }else if(ps == "paper" && cs == "rock"){
-        yourScore +=1;
-        displayResults(0,"flip");
-        message = "You Win!, Paper beats Rock!";
-        round.winner = "you";
-        round.message = message;
+        gameProcess(-1,1,0,0,"flip","you",2);
     }else if(ps == "paper" && cs == "scissors"){
-        computerScore +=1;
-        displayResults(1,"");
-        message = "You Lose! Scissors beats Paper";
-        round.winner = "computer";
-        round.message = message;
+        gameProcess(-1,0,1,1,"","computer",3);
     }else if(ps == "scissors" && cs == "paper"){
-        yourScore +=1;
-        displayResults(1,"flip");
-        message = "You Win!, Scissors beats paper!";
-        round.winner = "you";
-        round.message = message;
+        gameProcess(-1,1,0,1,"flip","you",4);
     }else if(ps == "scissors" && cs == "rock"){
-        computerScore +=1;
-        displayResults(2,"");
-        message = "You Lose! Rock beats Scissors";
-        round.winner = "computer";
-        round.message = message;
+        gameProcess(-1,0,1,2,"","computer",5);
     }else{
-        rounds += 1;
-        displayResults(3,"");
-        message = "It's a tie! Play again.";
-        round.winner = "tie";
-        round.message = message;
+        gameProcess(0,0,0,3,"","tie",6);
     }
     scoreBoard.push(round); 
+    
+    game(scoreBoard.length - 1, 0);
 }
 
-function game(){
-    if(round <= 1){
-
+function game(i, time ){
+    // console.log(rounds);
+    if(time != 1){
+        if(rounds >= 1){
+            messageDisplayElement.innerHTML = scoreBoard[i].message;
+            console.log(scoreBoard[i].message);
+        } else if(rounds == 0 && yourScore > computerScore){
+            messageDisplayElement.innerHTML = messages[7];
+        } else {
+            messageDisplayElement.innerHTML = messages[8];
+        }
+    }else{
+        if(rounds == 1){
+            messageDisplayElement.innerHTML = messages[11];
+        }else if(rounds == 2){
+            messageDisplayElement.innerHTML = messages[11];
+        }
     }
+}
+for(let i =1; i<messages.length; i++){
+    console.log(i, messages[i]);
 }

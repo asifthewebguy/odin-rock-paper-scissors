@@ -32,13 +32,15 @@ div.container{
     margin: 0 auto;
     background-color: var(--bg-color);
 }
-p.desc{
+p.desc,
+p.descR{
     max-width: 70%;
     text-align: center;
     font-size: 1.2rem;
     font-weight: bold;
     margin: 0 auto;
 }
+
 section.buttons .container{
     display: flex;
     flex-direction: row;
@@ -51,6 +53,7 @@ section.buttons .container button{
     height: 10vw;
     border-radius: 50%;
     border: none;
+    cursor: pointer;
 }
 section.buttons .container button>img{
     width: 50%;
