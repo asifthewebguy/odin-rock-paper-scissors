@@ -59,6 +59,10 @@ section.buttons .container button>img{
 section.result img{
     width: 100%;
 }
+section.result img.flip{
+    transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+}
 section.score-board .container{
     display: flex;
     flex-direction: column;
