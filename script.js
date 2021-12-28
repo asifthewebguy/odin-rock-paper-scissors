@@ -15,7 +15,8 @@ const messages =[
     "Whats your next Move?",
     "Only 2 Rounds left. Whats your next Move?",
     "Final Round!",
-
+    "What are your waiting for?",
+    "Choose your wepon!",
 ];
 // message element
 let messageDisplayElement = document.getElementsByClassName('descR')[0];
@@ -25,7 +26,8 @@ const cSE = document.getElementsByClassName('compscore')[0];
 
 // getting buttons
 let psButton = document.getElementsByClassName('psButton');
-
+// getting reset button
+const resetBtn = document.getElementsByClassName('result')[4].getElementsByTagName('button')[0];
 // adding event listener to the buttons
 for (let i = 0; i < psButton.length; i++) {
     let psdata = psButton[i].getAttribute('data');
@@ -53,15 +55,22 @@ function playerSelection(selection){
 
 // displays approperiate result on screen
 function displayResults(id, location =""){
-    resultSect[id].style.display = "flex";
-    if(location == 'flip'){
-        resultSect[id].getElementsByTagName('img')[0].classList.add("flip");
-    }
-    uSB(yourScore,computerScore);
+    if(id == 4){
+        for(let i =0; i < resultSect.length; i++){
+            resultSect[i].style.display = "none";
+        }
+        resultSect[id].style.display = "flex";
+    }else{
+        resultSect[id].style.display = "flex";
+        if(location == 'flip'){
+            resultSect[id].getElementsByTagName('img')[0].classList.add("flip");
+        }
+        uSB(yourScore,computerScore);
 
-    setTimeout(
-        resetResultDisplay, 3000
-    );
+        setTimeout(
+            resetResultDisplay, 3000
+        );
+    }
 }
 
 // resets result display
@@ -71,9 +80,9 @@ function resetResultDisplay(){
         for(let i =0; i < resultSect.length; i++){
             resultSect[i].style.display = "none";
         }
-        game(scoreBoard.length - 1, 1);
+        game(1, 1);
     }else{
-        game(scoreBoard.length - 1, 1);
+        game(1, 1);
     }
     
 }
@@ -120,24 +129,41 @@ function playRound(playerSelection, computerSelection){
 }
 
 function game(i, time ){
-    // console.log(rounds);
-    if(time != 1){
+    if(time == 0){
         if(rounds >= 1){
+            messageDisplayElement.classList.add("gameMessage");
             messageDisplayElement.innerHTML = scoreBoard[i].message;
-            console.log(scoreBoard[i].message);
+            console.log(i, scoreBoard[i].message);
         } else if(rounds == 0 && yourScore > computerScore){
             messageDisplayElement.innerHTML = messages[7];
+            displayResults(4,"");
         } else {
             messageDisplayElement.innerHTML = messages[8];
+            displayResults(4,"");
         }
-    }else{
+    }else if(time == 1){
         if(rounds == 1){
             messageDisplayElement.innerHTML = messages[11];
         }else if(rounds == 2){
-            messageDisplayElement.innerHTML = messages[11];
+            messageDisplayElement.innerHTML = messages[10];
+        }else if(rounds == 5){
+            
         }
+    }else{
+        messageDisplayElement.innerHTML = messages[i];
     }
 }
-for(let i =1; i<messages.length; i++){
-    console.log(i, messages[i]);
+function restart(){
+    resetBtn.addEventListener('click', ()=>{
+        window.location.reload();
+    });
 }
+restart();
+// for(let i =1; i<messages.length; i++){
+//     console.log(i, messages[i]);
+// }
+
+setTimeout(
+    game(1, 1),
+    30000
+);
