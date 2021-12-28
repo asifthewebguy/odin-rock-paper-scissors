@@ -2,6 +2,10 @@ let yourScore = 0;
 let computerScore = 0;
 let rounds = 5;
 
+let scoreBoard = [];
+// getting buttons
+let psButton = document.getElementsByClassName('psButton');
+
 function computerPlay(){
     var options = ['Rock', 'Paper', 'Scissors'];
     var random = Math.floor(Math.random() * 3);
@@ -9,9 +13,11 @@ function computerPlay(){
 }
 
 function playRound(playerSelection, computerSelection){
-    ps = playerSelection.toLowerCase();
-    cs = computerSelection.toLowerCase();
+    ps = playerSelection;
+    cs = computerSelection;
     console.log(ps, cs);
+    let round = { pSelection: ps, cSelection: cs };
+    scoreBoard.push(round); 
     if (ps == "rock" && cs == "scissors") {
         yourScore +=1;
         return "You Win!, Rock beats Scissors!";
@@ -24,14 +30,18 @@ function playRound(playerSelection, computerSelection){
     }
 }
 
+function gameCalculation(){
+
+}
 
 function game(){
-    let score = 0;
     for (let i = 0; i < rounds; i++) {
-        const playerSelection = window.prompt("message", "rock");
+        const playerSelection = psButton.dataset;
         const computerSelection = computerPlay();
         console.log(playRound(playerSelection, computerSelection));
         console.log("your score: " + yourScore + " & computer's score: " + computerScore);
     }
 }
-game();
+// game();
+// const buttonSection = document.getElementsByClassName('buttons')[0];
+// buttonSection.style.display = "none";

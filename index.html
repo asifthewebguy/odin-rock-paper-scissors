@@ -5,8 +5,45 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissor - check the console</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
+    <header>
+        <h1>Rock, Paper, Scissors</h1>
+    </header>
+    <section class="desc-rules">
+        <div class="container">
+            <p class="desc">
+                Play minimum 5 rounds of Rock, Paper, Scissors with your Computer. If the round is a tie, you have to play it again.
+                <span>let the game begin...</span>
+            </p>
+        </div> 
+    </section>
+    <section class="buttons">
+        <div class="container">
+            <button class="psButton" onclick="rock"><img src="./assets/rock.svg" alt="Rock"></button>
+            <button class="psButton" onclick="paper"><img src="./assets/paper.svg" alt="Rock"></button>
+            <button class="psButton" onclick="scissors"><img src="./assets/scissors.svg" alt="Rock"></button>
+        </div>
+    </section>
+    <section class="result">
+        <div class="container">
+            <img src="./assets/rock-paper.svg" alt="">
+        </div>
+    </section>
+    <section class="score-board">
+        <div class="container">
+            <h3>Score Board</h3>
+            <div class="scores">
+                <div class="yourscore">You: <span class="score">0</span></div>
+                <div class="compscore">Computer: <span class="score">0</span></div>
+            </div>
+        </div>
+    </section>
     <script src="script.js"></script>
 </body>
 </html>
