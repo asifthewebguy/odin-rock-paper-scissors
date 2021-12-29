@@ -158,7 +158,7 @@ function restart(){
         window.location.reload();
     });
     const descCon = document.getElementsByTagName('header')[0];
-    descCon.innerHTML = "<h1>Rock Paper Scissors</h1><div class='source'><a href='https://github.com/asifthewebguy/odin-rock-paper-scissors'><img src='./assets/github.svg' alt='github'/></a></div>";
+    descCon.innerHTML = "<h1>Rock Paper Scissors</h1><div class='source'><a href='https://github.com/asifthewebguy/odin-rock-paper-scissors' target='_blank'><img src='./assets/github.svg' alt='github'/></a></div>";
 }
 restart();
 
