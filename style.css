@@ -3,7 +3,7 @@
     --bg-color: #FAFAFA;
     --color: #000;
     --top-bottom: 100px;
-    --height: calc(100vh/4);
+    --height: calc(100vh/4 - 5px);
 }
 *{
     margin: 0;
@@ -25,7 +25,20 @@ header, section{
 }
 header{
     text-align: center;
-    font-size: 2rem;
+    font-size: 3rem;
+    position: relative;
+}
+
+header > .source{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+}
+.source img{
+    width: 50%;
+    height: 50%;
 }
 div.container{
     max-width: var(--width);
@@ -96,4 +109,8 @@ section.score-board .scores{
     align-items: center;
     justify-items: center;
     font-size: 1.5rem;
+}
+footer{
+    text-align: center;
+    font-size: 1rem;
 }
