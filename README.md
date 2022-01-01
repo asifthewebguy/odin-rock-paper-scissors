@@ -1,2 +1,2 @@
-# odin-rock-paper-scissors
+# rock-paper-scissors
 JS based rock paper scissors
