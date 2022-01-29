@@ -189,7 +189,12 @@ window.addEventListener('beforeinstallprompt', (e) => {
     // stashing the event so it can be triggered later.
     deferredPrompt = e;
     console.log(addBtn);
-    addBtn.style.display = "block";
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+        // do nothing
+    } else {
+        addBtn.style.display = "block";
+    }
+
 });
 
 addBtn.addEventListener('click', (e) => {
