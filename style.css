@@ -4,6 +4,7 @@
     --color: #000;
     --top-bottom: 100px;
     --height: calc(100vh/4 - 5px);
+    /* font-size: 10px; */
 }
 
 * {
@@ -21,6 +22,7 @@ body {
     background-color: var(--bg-color);
     font-size: 14px;
     font-family: 'Roboto', sans-serif;
+    position: relative;
 }
 
 header,
@@ -99,6 +101,11 @@ section.result img {
     width: 100%;
 }
 
+section.result .container {
+    display: flex;
+    column-gap: 10px;
+}
+
 section.result img.flip {
     transform: scaleX(-1);
     -webkit-transform: scaleX(-1);
@@ -135,4 +142,10 @@ section.score-board .scores {
 footer {
     text-align: center;
     font-size: 1rem;
+}
+
+button.add2HS {
+    bottom: 0;
+    font-size: 1em;
+    display: none;
 }

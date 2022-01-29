@@ -28,6 +28,8 @@ const cSE = document.getElementsByClassName('compscore')[0];
 let psButton = document.getElementsByClassName('psButton');
 // getting reset button
 const resetBtn = document.getElementsByClassName('result')[4].getElementsByTagName('button')[0];
+// getting install button
+const addBtn = document.querySelector('.add2HS');
 // adding event listener to the buttons
 for (let i = 0; i < psButton.length; i++) {
     let psdata = psButton[i].getAttribute('data');
@@ -177,3 +179,27 @@ function resize() {
     }
 }
 resize();
+
+// PWA Install Prompt
+let deferredPrompt;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    // prevent chrome 67 and earlier from automatically showing prompt
+    e.preventDefault();
+    // stashing the event so it can be triggered later.
+    deferredPrompt = e;
+    console.log(addBtn);
+    addBtn.style.display = "block";
+});
+
+addBtn.addEventListener('click', (e) => {
+    console.log("button was clicked");
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then((choiceResult) => {
+        if (choiceResult === "accepted") {
+            console.log('User accepted the A2HS prompt');
+        }
+
+        deferredPrompt = null;
+    });
+});
