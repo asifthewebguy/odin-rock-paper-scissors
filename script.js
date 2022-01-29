@@ -16,7 +16,7 @@ const messages = [
     "Only 2 Rounds left. Whats your next Move?",
     "Final Round!",
     "What are your waiting for?",
-    "Choose your wepon!",
+    "Choose your weapon!",
 ];
 // message element
 let messageDisplayElement = document.getElementsByClassName('descR')[0];
@@ -53,7 +53,7 @@ function playerSelection(selection) {
     playRound(selection, computerPlay());
 }
 
-// displays approperiate result on screen
+// displays appropriate result on screen
 function displayResults(id, location = "") {
     if (id == 4) {
         for (let i = 0; i < resultSect.length; i++) {
@@ -159,7 +159,7 @@ function restart() {
         window.location.reload();
     });
     const descCon = document.getElementsByTagName('header')[0];
-    descCon.innerHTML = "<h1>Rock Paper Scissors</h1><div class='source'><a href='https://github.com/asifthewebguy/odin-rock-paper-scissors' target='_blank'><img src='./assets/github.svg' alt='github'/></a></div>";
+    descCon.innerHTML = "<h1>Rock Paper Scissors</h1><div class='source'><a href='https://github.com/asifthewebguy/odin-rock-paper-scissors' rel='noreferrer' target='_blank'><img src='./assets/github.svg' alt='github'/></a></div>";
 }
 restart();
 
